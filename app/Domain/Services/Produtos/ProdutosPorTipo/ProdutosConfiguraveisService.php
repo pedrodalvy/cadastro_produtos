@@ -2,21 +2,25 @@
 
 namespace App\Domain\Services\Produtos\ProdutosPorTipo;
 
+use App\Http\Resources\ProdutoConfiguravelResource;
+use App\Models\Produto;
+
 class ProdutosConfiguraveisService extends ProdutosPorTipoAbstract
 {
-
-    public function exibir(array $request)
+    public function exibir(Produto $produto)
     {
-        // TODO: Implement exibir() method.
+        $this->marcarProdutoVisualizado($produto);
+
+        return new ProdutoConfiguravelResource($produto);
     }
 
-    public function editar(array $request)
+    public function editar(Produto $produto, array $request)
     {
         // TODO: Implement editar() method.
     }
 
-    public function remover(array $request)
+    public function cadastrar(array $request)
     {
-        // TODO: Implement remover() method.
+        // TODO: Implement cadastrar() method.
     }
 }

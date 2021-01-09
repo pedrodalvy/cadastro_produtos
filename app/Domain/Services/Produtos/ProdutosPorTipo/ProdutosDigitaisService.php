@@ -2,21 +2,26 @@
 
 namespace App\Domain\Services\Produtos\ProdutosPorTipo;
 
+use App\Http\Resources\ProdutoDigitalResource;
+use App\Models\Produto;
+use Illuminate\Http\Resources\Json\JsonResource;
+
 class ProdutosDigitaisService extends ProdutosPorTipoAbstract
 {
-
-    public function exibir(array $request)
+    public function exibir(Produto $produto): JsonResource
     {
-        // TODO: Implement exibir() method.
+        $this->marcarProdutoVisualizado($produto);
+
+        return new ProdutoDigitalResource($produto);
     }
 
-    public function editar(array $request)
+    public function editar(Produto $produto, array $request)
     {
         // TODO: Implement editar() method.
     }
 
-    public function remover(array $request)
+    public function cadastrar(array $request)
     {
-        // TODO: Implement remover() method.
+        // TODO: Implement cadastrar() method.
     }
 }
