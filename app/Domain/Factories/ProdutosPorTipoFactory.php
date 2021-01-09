@@ -2,7 +2,7 @@
 
 namespace App\Domain\Factories;
 
-use App\Domain\Enuns\ProdutoEnum;
+use App\Domain\Enums\ProdutoEnum;
 use App\Domain\Services\Produtos\ProdutosPorTipo\ProdutosAgrupadosService;
 use App\Domain\Services\Produtos\ProdutosPorTipo\ProdutosConfiguraveisService;
 use App\Domain\Services\Produtos\ProdutosPorTipo\ProdutosDigitaisService;

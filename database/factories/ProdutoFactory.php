@@ -2,7 +2,7 @@
 
 /** @var Factory $factory */
 
-use App\Domain\Enuns\ProdutoEnum;
+use App\Domain\Enums\ProdutoEnum;
 use App\Models\Produto;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
