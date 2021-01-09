@@ -2,9 +2,11 @@
 
 namespace App\Domain\Services\Produtos\ProdutosPorTipo;
 
+use App\Models\Produto;
+
 interface ProdutosPorTipoInterface
 {
-    public function exibir(array $request);
-    public function editar(array $request);
-    public function remover(array $request);
+    public function exibir(Produto $produto);
+    public function editar(Produto $produto, array $request);
+    public function cadastrar(array $request);
 }
