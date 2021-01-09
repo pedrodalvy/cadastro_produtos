@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Domain\Factories\ProdutosPorTipoFactory;
 use App\Domain\Repositories\ProdutoRepository;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CadastrarProdutoRequest;
 use App\Http\Requests\ListarProdutosRequest;
 use App\Http\Resources\ProdutoCollection;
 use App\Models\Produto;
@@ -38,6 +39,23 @@ class ProdutosController extends Controller
         try {
             $service = ProdutosPorTipoFactory::factory($produto->tipo_id);
             $response = $service->exibir($produto);
+
+        } catch (DomainException $e) {
+            $message = $e->getMessage();
+            $response = response()->json(['message' => $message], 400);
+
+        } catch (Exception $exception) {
+            $message = 'Ocorreu um erro interno';
+            $response = response()->json(['message' => $message], 500);
+        }
+
+        return response()->json($response);
+    }
+
+    public function cadastrarProduto(CadastrarProdutoRequest $request): JsonResponse
+    {
+        try {
+            $response = $request;
 
         } catch (DomainException $e) {
             $message = $e->getMessage();
