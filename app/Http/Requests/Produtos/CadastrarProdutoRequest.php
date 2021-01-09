@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Produtos;
 
 use App\Domain\Enums\ProdutoEnum;
 use Illuminate\Foundation\Http\FormRequest;
