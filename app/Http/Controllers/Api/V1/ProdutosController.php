@@ -6,6 +6,7 @@ use App\Domain\Repositories\ProdutoRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListarProdutosRequest;
 use App\Http\Resources\ProdutoCollection;
+use DomainException;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -16,14 +17,17 @@ class ProdutosController extends Controller
         try {
             $filters = $request->validated();
             $produtos = $produtoRepository->all($filters)->paginate();
-            $response = response()->json(new ProdutoCollection($produtos));
+            $response = new ProdutoCollection($produtos);
+
+        } catch (DomainException $e) {
+            $message = $e->getMessage();
+            $response = response()->json(['message' => $message], 400);
 
         } catch (Exception $exception) {
-            $response = response()->json([
-                'message' => 'Ocorreu um erro interno'
-            ], 500);
+            $message = 'Ocorreu um erro interno';
+            return response()->json(['message' => $message], 500);
         }
 
-        return $response;
+        return response()->json($response);
     }
 }
