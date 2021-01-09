@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Produto extends Model
 {
@@ -28,8 +30,27 @@ class Produto extends Model
         return $this->hasMany(ProdutoConfiguracao::class, 'produto_id', 'id');
     }
 
-    public function produtosAgrupados(): HasMany
+    public function grupo(): HasOneThrough
     {
-        return $this->hasMany(ProdutoGrupo::class, 'grupo_id', 'id');
+        return $this->hasOneThrough(
+            __CLASS__,
+            ProdutoGrupo::class,
+            'produto_id',
+            'id',
+            'id',
+            'grupo_id'
+        );
+    }
+
+    public function produtosAgrupados(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            __CLASS__,
+            ProdutoGrupo::class,
+            'grupo_id',
+            'id',
+            'id',
+            'produto_id'
+        );
     }
 }
