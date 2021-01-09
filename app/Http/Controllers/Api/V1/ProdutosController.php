@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Domain\Factories\ProdutosPorTipoFactory;
 use App\Domain\Repositories\ProdutoRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListarProdutosRequest;
 use App\Http\Resources\ProdutoCollection;
+use App\Models\Produto;
 use DomainException;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -26,6 +28,24 @@ class ProdutosController extends Controller
         } catch (Exception $exception) {
             $message = 'Ocorreu um erro interno';
             return response()->json(['message' => $message], 500);
+        }
+
+        return response()->json($response);
+    }
+
+    public function verProduto(Produto $produto): JsonResponse
+    {
+        try {
+            $service = ProdutosPorTipoFactory::factory($produto->tipo_id);
+            $response = $service->exibir($produto);
+
+        } catch (DomainException $e) {
+            $message = $e->getMessage();
+            $response = response()->json(['message' => $message], 400);
+
+        } catch (Exception $exception) {
+            $message = 'Ocorreu um erro interno';
+            $response = response()->json(['message' => $message], 500);
         }
 
         return response()->json($response);

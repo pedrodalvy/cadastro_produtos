@@ -12,5 +12,6 @@ Route::prefix('auth')->middleware('api')->group( function () {
 Route::prefix('v1')->middleware(['auth:api'])->group( function () {
     Route::prefix('produtos')->group(function () {
         Route::get('', 'Api\V1\ProdutosController@listarTodos');
+        Route::get('/{produto}', 'Api\V1\ProdutosController@verProduto');
     });
 });
