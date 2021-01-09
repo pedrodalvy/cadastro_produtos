@@ -8,6 +8,7 @@ use App\Domain\Services\Produtos\ProdutosPorTipo\ProdutosConfiguraveisService;
 use App\Domain\Services\Produtos\ProdutosPorTipo\ProdutosDigitaisService;
 use App\Domain\Services\Produtos\ProdutosPorTipo\ProdutosPorTipoAbstract;
 use App\Domain\Services\Produtos\ProdutosPorTipo\ProdutosSimplesService;
+use DomainException;
 
 class ProdutosPorTipoFactory
 {
@@ -22,6 +23,8 @@ class ProdutosPorTipoFactory
                 return app(ProdutosConfiguraveisService::class);
             case ProdutoEnum::PRODUTO_AGRUPADO:
                 return app(ProdutosAgrupadosService::class);
+            default:
+                throw new DomainException('Tipo de Produto Inexistente.');
         }
     }
 }
