@@ -27,4 +27,9 @@ class Produto extends Model
     {
         return $this->hasMany(ProdutoConfiguracao::class, 'produto_id', 'id');
     }
+
+    public function produtosAgrupados(): HasMany
+    {
+        return $this->hasMany(ProdutoGrupo::class, 'grupo_id', 'id');
+    }
 }
