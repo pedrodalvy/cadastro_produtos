@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use App\Domain\Enums\ProdutoEnum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProdutoResource extends JsonResource
+class ProdutoConfiguravelResource extends JsonResource
 {
     public function toArray($request): array
     {
@@ -13,9 +13,12 @@ class ProdutoResource extends JsonResource
             'id' => $this->id,
             'nome' => $this->nome,
             'descricao' => $this->descricao,
-            'valor' => $this->valor,
+            'tipo_id' => $this->tipo_id,
             'tipo' => ProdutoEnum::getDescription($this->tipo_id),
-            'visualizado' => $this->visualizado
+            'valor' => $this->valor,
+            'criado_em' => $this->created_at->format('Y-m-d H:i:s'),
+            'atualizado_em' => $this->updated_at->format('Y-m-d H:i:s'),
+            'caracteristicas' => ConfiguracaoProdutoResource::collection($this->configuracoes),
         ];
     }
 }
