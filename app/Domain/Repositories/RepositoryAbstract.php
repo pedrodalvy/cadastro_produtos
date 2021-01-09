@@ -2,7 +2,6 @@
 
 namespace App\Domain\Repositories;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class RepositoryAbstract
@@ -10,10 +9,12 @@ abstract class RepositoryAbstract
     /** @var Model */
     protected $model;
 
-    public function all(array $filters): Collection
+    public function all(array $filters = [])
     {
-        $attributes = !empty($filters) ? $filters : ['*'];
+        if (empty($filters)) {
+            return $this->model;
+        }
 
-        return $this->model->get($attributes);
+        return $this->model->where($filters);
     }
 }

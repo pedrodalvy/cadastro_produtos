@@ -8,3 +8,9 @@ Route::prefix('auth')->middleware('api')->group( function () {
     Route::post('logout', 'Auth\AuthController@logout');
     Route::post('refresh-token', 'Auth\AuthController@refresh');
 });
+
+Route::prefix('v1')->middleware(['auth:api'])->group( function () {
+    Route::prefix('produtos')->group(function () {
+        Route::get('', 'Api\V1\ProdutosController@listarTodos');
+    });
+});
