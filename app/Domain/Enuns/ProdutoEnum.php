@@ -2,7 +2,9 @@
 
 namespace App\Domain\Enuns;
 
-class ProdutoEnum
+use BenSampo\Enum\Enum;
+
+class ProdutoEnum extends Enum
 {
     public const PRODUTO_SIMPLES = 1;
     public const PRODUTO_DIGITAL = 2;
