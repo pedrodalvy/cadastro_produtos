@@ -25,7 +25,7 @@ também foram criados endpoints de visualização e remoção dos produtos.
   vinculados à ele.
 
 ## Itens Opcionais
-- [ ] Criação de log para edição do produto, contendo `data`, `hora`, `valor_anterior` e `valor_atual` do produto;
+- [x] Criação de log para edição do produto, contendo `data`, `hora`, `valor_anterior` e `valor_atual` do produto;
 - [x] Criação de um campo booleano que marque um produto como visitado ao visualizá-lo;
 - [ ] Criação de um valor promocional para os produtos, com tempo determinado no cadastro da promoção.
 

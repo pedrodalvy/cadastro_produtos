@@ -19,17 +19,21 @@ class ProdutosAgrupadosService extends ProdutosPorTipoAbstract
     {
         $this->validaTipoProdutosSimples($request['produtos']);
 
+        $produtoAntigo = $produto->toArray();
+
         if (!$produto->update($request)) {
             throw new \RuntimeException('Não foi possível editar o Produto.');
         }
 
-        $agrupamentoOld = $this->getIdProdutosAgrupados($produto->produtosAgrupados);
+        $agrupamentoAntigo = $this->getIdProdutosAgrupados($produto->produtosAgrupados);
         $produto->agrupar()->delete();
 
         if (!$produto->agrupar()->createMany($request['produtos'])) {
-            $produto->agrupar()->createMany($agrupamentoOld);
+            $produto->agrupar()->createMany($agrupamentoAntigo);
             throw new \RuntimeException('Não foi possível editar as configurações do produto.');
         }
+
+        $this->createLog($produtoAntigo, $request);
 
         return new ProdutoAgrupadoResource($produto->fresh());
     }

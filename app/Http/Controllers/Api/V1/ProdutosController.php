@@ -57,7 +57,7 @@ class ProdutosController extends Controller
     {
         try {
             $service = ProdutosPorTipoFactory::factory($request->tipo_id);
-            $response = $service->cadastrar($request->all());
+            $response = $service->cadastrar($request->validated());
 
         } catch (DomainException $e) {
             $message = $e->getMessage();
@@ -75,7 +75,7 @@ class ProdutosController extends Controller
     {
         try {
             $service = ProdutosPorTipoFactory::factory($request->tipo_id);
-            $response = $service->editar($produto, $request->all());
+            $response = $service->editar($produto, $request->validated());
 
         } catch (DomainException $e) {
             $message = $e->getMessage();
