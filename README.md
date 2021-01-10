@@ -4,6 +4,8 @@
 Conforme solicitado no desafio, foram criados os endpoints para cadastro, listagem e edição de produtos, além desses, 
 também foram criados endpoints de visualização e remoção dos produtos.
 
+Link com ducumentação dos endpoints https://documenter.getpostman.com/view/11654668/TVzREcvW
+
 ## Regras adicionadas, que foram definidas no escopo do teste e são obrigatórias
 - Os produtos foram divididos em 4 tipos, sendo:
     - Produto simples, que listam apenas os atributos `nome`, `descricao`, `valor`, `criado_em` e `atualizado_em`;
@@ -33,7 +35,7 @@ também foram criados endpoints de visualização e remoção dos produtos.
 - [x] Desenvolver autenticação na API;
 - [x] Utilização de Padrões de Projetos;
 - [ ] Testes Automatizados;
-- [ ] Documentação de todos os endpoints.
+- [x] Documentação de todos os endpoints.
 
 ## Tecnologias Utilizadas
 - PHP 7;
