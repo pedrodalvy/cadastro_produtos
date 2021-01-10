@@ -20,9 +20,6 @@ class CreateLogProdutosTable extends Migration
             $table->unsignedBigInteger('produto_id');
             $table->unsignedBigInteger('usuario_id');
 
-            $table->foreign('produto_id')->references('id')->on('produtos');
-            $table->foreign('usuario_id')->references('id')->on('users');
-
             $table->timestamps();
         });
     }

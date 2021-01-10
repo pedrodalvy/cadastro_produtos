@@ -108,4 +108,21 @@ class ProdutosController extends Controller
 
         return response()->json($response);
     }
+
+    public function removerProduto(Produto $produto)
+    {
+        try {
+            $produto->delete();
+
+        } catch (DomainException $e) {
+            $message = $e->getMessage();
+            return response()->json(['message' => $message], 400);
+
+        } catch (Exception $exception) {
+            $message = 'Ocorreu um erro interno';
+            return response()->json(['message' => $message], 500);
+        }
+
+        return response()->noContent();
+    }
 }

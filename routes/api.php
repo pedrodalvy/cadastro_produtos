@@ -16,5 +16,6 @@ Route::prefix('v1')->middleware(['auth:api'])->group( function () {
         Route::post('', 'Api\V1\ProdutosController@cadastrarProduto');
         Route::put('/{produto}', 'Api\V1\ProdutosController@editarProduto');
         Route::post('/{produto}/desconto', 'Api\V1\ProdutosController@criarDesconto');
+        Route::delete('/{produto}', 'Api\V1\ProdutosController@removerProduto');
     });
 });

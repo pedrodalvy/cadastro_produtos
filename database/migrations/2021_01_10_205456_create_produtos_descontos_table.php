@@ -20,7 +20,10 @@ class CreateProdutosDescontosTable extends Migration
             $table->timestamp('data_limite');
             $table->timestamps();
 
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->foreign('produto_id')
+                ->references('id')
+                ->on('produtos')
+                ->onDelete('cascade');
         });
     }
 
