@@ -26,9 +26,11 @@ class ProdutosAgrupadosService extends ProdutosPorTipoAbstract
         }
 
         $agrupamentoAntigo = $this->getIdProdutosAgrupados($produto->produtosAgrupados);
+        $agrupamentoNovo = array_unique($request['produtos'], SORT_REGULAR);
+
         $produto->agrupar()->delete();
 
-        if (!$produto->agrupar()->createMany($request['produtos'])) {
+        if (!$produto->agrupar()->createMany($agrupamentoNovo)) {
             $produto->agrupar()->createMany($agrupamentoAntigo);
             throw new \RuntimeException('Não foi possível editar as configurações do produto.');
         }

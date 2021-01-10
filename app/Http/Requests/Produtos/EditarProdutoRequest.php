@@ -74,10 +74,12 @@ class EditarProdutoRequest extends FormRequest
 
     private function getProdutoAgrupadoRules($rules): array
     {
+        $produto = $this->route()->parameter('produto');
+
         $rules['produtos'] = 'required|array|min:2';
         $rules['produtos.*'] = 'required|array';
         $rules['produtos.*.produto_id'] = Rule::unique('produtos_grupos', 'produto_id')
-            ->ignore($this->get('id'), 'grupo_id');
+            ->ignore($produto->id, 'grupo_id');
 
         return $rules;
     }
