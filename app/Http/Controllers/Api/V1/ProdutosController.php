@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Domain\Factories\ProdutosPorTipoFactory;
-use App\Domain\Repositories\ProdutoRepository;
 use App\Domain\Services\Produtos\ProdutosService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produtos\CadastrarProdutoRequest;
 use App\Http\Requests\Produtos\EditarProdutoRequest;
 use App\Http\Requests\Produtos\ListarProdutosRequest;
 use App\Http\Requests\Produtos\ProdutoDescontoRequest;
-use App\Http\Resources\ProdutoCollection;
 use App\Models\Produto;
 use DomainException;
 use Exception;
@@ -18,12 +16,11 @@ use Illuminate\Http\JsonResponse;
 
 class ProdutosController extends Controller
 {
-    public function listarTodos(ListarProdutosRequest $request, ProdutoRepository $produtoRepository): JsonResponse
+    public function listarTodos(ListarProdutosRequest $request): JsonResponse
     {
         try {
-            $filters = $request->validated();
-            $produtos = $produtoRepository->all($filters)->paginate();
-            $response = new ProdutoCollection($produtos);
+            $service = new ProdutosService();
+            $response = $service->listarTodos($request->validated());
 
         } catch (DomainException $e) {
             $message = $e->getMessage();

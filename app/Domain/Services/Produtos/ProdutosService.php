@@ -4,6 +4,7 @@ namespace App\Domain\Services\Produtos;
 
 use App\Domain\Repositories\ProdutoDescontoRepository;
 use App\Domain\Repositories\ProdutoRepository;
+use App\Http\Resources\ProdutoCollection;
 use App\Models\Produto;
 
 class ProdutosService
@@ -27,5 +28,11 @@ class ProdutosService
         }
 
         return ['message' => 'Desconto cadastrado com sucesso.'];
+    }
+
+    public function listarTodos(array $filters): ProdutoCollection
+    {
+        $produtos = $this->produtoRepository->all($filters)->paginate();
+        return new ProdutoCollection($produtos);
     }
 }
