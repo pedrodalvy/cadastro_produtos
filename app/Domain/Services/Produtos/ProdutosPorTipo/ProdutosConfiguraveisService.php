@@ -15,9 +15,21 @@ class ProdutosConfiguraveisService extends ProdutosPorTipoAbstract
         return new ProdutoConfiguravelResource($produto);
     }
 
-    public function editar(Produto $produto, array $request)
+    public function editar(Produto $produto, array $request): JsonResource
     {
-        // TODO: Implement editar() method.
+        if (!$produto->update($request)) {
+            throw new \RuntimeException('Não foi possível editar o Produto.');
+        }
+
+        $configuracoesOld = $produto->configuracoes->toArray();
+        $produto->configuracoes()->delete();
+
+        if (!$produto->configuracoes()->createMany($request['configuracao'])) {
+            $produto->configuracoes()->createMany($configuracoesOld);
+            throw new \RuntimeException('Não foi possível editar as configurações do produto.');
+        }
+
+        return new ProdutoConfiguravelResource($produto->fresh());
     }
 
     public function cadastrar(array $request): JsonResource

@@ -6,6 +6,7 @@ use App\Domain\Factories\ProdutosPorTipoFactory;
 use App\Domain\Repositories\ProdutoRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produtos\CadastrarProdutoRequest;
+use App\Http\Requests\Produtos\EditarProdutoRequest;
 use App\Http\Requests\Produtos\ListarProdutosRequest;
 use App\Http\Resources\ProdutoCollection;
 use App\Models\Produto;
@@ -57,6 +58,24 @@ class ProdutosController extends Controller
         try {
             $service = ProdutosPorTipoFactory::factory($request->tipo_id);
             $response = $service->cadastrar($request->all());
+
+        } catch (DomainException $e) {
+            $message = $e->getMessage();
+            return response()->json(['message' => $message], 400);
+
+        } catch (Exception $exception) {
+            $message = 'Ocorreu um erro interno';
+            return response()->json(['message' => $message], 500);
+        }
+
+        return response()->json($response);
+    }
+
+    public function editarProduto(Produto $produto, EditarProdutoRequest $request): JsonResponse
+    {
+        try {
+            $service = ProdutosPorTipoFactory::factory($request->tipo_id);
+            $response = $service->editar($produto, $request->all());
 
         } catch (DomainException $e) {
             $message = $e->getMessage();

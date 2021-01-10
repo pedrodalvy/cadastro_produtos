@@ -15,9 +15,17 @@ class ProdutosDigitaisService extends ProdutosPorTipoAbstract
         return new ProdutoDigitalResource($produto);
     }
 
-    public function editar(Produto $produto, array $request)
+    public function editar(Produto $produto, array $request): JsonResource
     {
-        // TODO: Implement editar() method.
+        if (!$produto->update($request)) {
+            throw new \RuntimeException('Não foi possível editar o Produto.');
+        }
+
+        if (!$produto->link()->update(['link' => $request['link']])) {
+            throw new \RuntimeException('Não foi possível editar o link do Produto.');
+        }
+
+        return new ProdutoDigitalResource($produto);
     }
 
     public function cadastrar(array $request): JsonResource

@@ -15,9 +15,13 @@ class ProdutosSimplesService extends ProdutosPorTipoAbstract
         return new ProdutoSimplesResource($produto);
     }
 
-    public function editar(Produto $produto, array $request)
+    public function editar(Produto $produto, array $request): JsonResource
     {
-        // TODO: Implement editar() method.
+        if (!$produto->update($request)) {
+            throw new \RuntimeException('Não foi possível editar o Produto');
+        }
+
+        return new ProdutoSimplesResource($produto);
     }
 
     public function cadastrar(array $request): JsonResource
