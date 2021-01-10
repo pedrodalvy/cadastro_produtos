@@ -15,7 +15,7 @@ class ProdutoDigitalResource extends JsonResource
             'descricao' => $this->descricao,
             'tipo_id' => $this->tipo_id,
             'tipo' => ProdutoEnum::getDescription($this->tipo_id),
-            'valor' => $this->valor,
+            'valor' => (float)$this->valor_atual,
             'link' => $this->link->link,
             'criado_em' => $this->created_at->format('Y-m-d H:i:s'),
             'atualizado_em' => $this->updated_at->format('Y-m-d H:i:s'),

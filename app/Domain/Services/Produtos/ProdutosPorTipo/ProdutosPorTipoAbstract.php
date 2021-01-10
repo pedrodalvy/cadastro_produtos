@@ -2,22 +2,14 @@
 
 namespace App\Domain\Services\Produtos\ProdutosPorTipo;
 
-use App\Domain\Repositories\ProdutoRepository;
+use App\Domain\Services\Produtos\ProdutosService;
 use App\Models\LogProduto;
 use App\Models\Produto;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
-abstract class ProdutosPorTipoAbstract implements ProdutosPorTipoInterface
+abstract class ProdutosPorTipoAbstract extends ProdutosService implements ProdutosPorTipoInterface
 {
-    /** @var ProdutoRepository */
-    protected $produtoRepository;
-
-    public function __construct()
-    {
-        $this->produtoRepository = app(ProdutoRepository::class);
-    }
-
     protected function marcarProdutoVisualizado(Produto $produto): void
     {
         if (!$produto->visualizado) {

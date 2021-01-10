@@ -20,6 +20,17 @@ class Produto extends Model
         'visualizado'
     ];
 
+    protected $casts = [
+        'valor' => 'decimal:2'
+    ];
+
+    public function getValorAtualAttribute()
+    {
+        return isset($this->desconto) && $this->desconto->data_limite->greaterThan(now())
+            ? $this->desconto->valor
+            : $this->valor;
+    }
+
     public function link(): HasOne
     {
         return $this->hasOne(ProdutoLink::class, 'produto_id', 'id');
@@ -57,5 +68,10 @@ class Produto extends Model
             'id',
             'produto_id'
         );
+    }
+
+    public function desconto(): HasOne
+    {
+        return $this->hasOne(ProdutoDesconto::class, 'produto_id', 'id');
     }
 }

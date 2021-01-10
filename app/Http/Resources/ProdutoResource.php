@@ -13,7 +13,7 @@ class ProdutoResource extends JsonResource
             'id' => $this->id,
             'nome' => $this->nome,
             'descricao' => $this->descricao,
-            'valor' => $this->valor,
+            'valor' => (float)$this->valor_atual,
             'tipo' => ProdutoEnum::getDescription($this->tipo_id),
             'visualizado' => $this->visualizado
         ];

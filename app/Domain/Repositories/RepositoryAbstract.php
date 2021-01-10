@@ -22,4 +22,9 @@ abstract class RepositoryAbstract
     {
         return $this->model->create($data);
     }
+
+    public function findOrCreateOneBy($key, $value): Model
+    {
+        return $this->model->where($key, '=', $value)->first() ?? $this->model;
+    }
 }
