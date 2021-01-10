@@ -42,6 +42,11 @@ class Produto extends Model
         );
     }
 
+    public function agrupar(): HasOne
+    {
+        return $this->hasOne(ProdutoGrupo::class, 'grupo_id', 'id');
+    }
+
     public function produtosAgrupados(): HasManyThrough
     {
         return $this->hasManyThrough(

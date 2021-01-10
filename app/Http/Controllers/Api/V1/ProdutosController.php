@@ -24,7 +24,7 @@ class ProdutosController extends Controller
 
         } catch (DomainException $e) {
             $message = $e->getMessage();
-            $response = response()->json(['message' => $message], 400);
+            return response()->json(['message' => $message], 400);
 
         } catch (Exception $exception) {
             $message = 'Ocorreu um erro interno';
@@ -42,11 +42,11 @@ class ProdutosController extends Controller
 
         } catch (DomainException $e) {
             $message = $e->getMessage();
-            $response = response()->json(['message' => $message], 400);
+            return response()->json(['message' => $message], 400);
 
         } catch (Exception $exception) {
             $message = 'Ocorreu um erro interno';
-            $response = response()->json(['message' => $message], 500);
+            return response()->json(['message' => $message], 500);
         }
 
         return response()->json($response);
@@ -55,15 +55,16 @@ class ProdutosController extends Controller
     public function cadastrarProduto(CadastrarProdutoRequest $request): JsonResponse
     {
         try {
-            $response = $request;
+            $service = ProdutosPorTipoFactory::factory($request->tipo_id);
+            $response = $service->cadastrar($request->all());
 
         } catch (DomainException $e) {
             $message = $e->getMessage();
-            $response = response()->json(['message' => $message], 400);
+            return response()->json(['message' => $message], 400);
 
         } catch (Exception $exception) {
             $message = 'Ocorreu um erro interno';
-            $response = response()->json(['message' => $message], 500);
+            return response()->json(['message' => $message], 500);
         }
 
         return response()->json($response);

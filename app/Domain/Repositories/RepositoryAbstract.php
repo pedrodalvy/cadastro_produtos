@@ -17,4 +17,9 @@ abstract class RepositoryAbstract
 
         return $this->model->where($filters);
     }
+
+    public function create($data)
+    {
+        return $this->model->create($data);
+    }
 }

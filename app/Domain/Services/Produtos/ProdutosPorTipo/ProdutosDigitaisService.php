@@ -20,8 +20,17 @@ class ProdutosDigitaisService extends ProdutosPorTipoAbstract
         // TODO: Implement editar() method.
     }
 
-    public function cadastrar(array $request)
+    public function cadastrar(array $request): JsonResource
     {
-        // TODO: Implement cadastrar() method.
+        if (!$produto = $this->produtoRepository->create($request)) {
+            throw new \RuntimeException('Não foi possível cadastrar o Produto.');
+        }
+
+        if (!$produto->link()->create($request)) {
+            $produto->delete();
+            throw new \RuntimeException('Houve um erro ao cadastrar o link do produto.');
+        }
+
+        return new ProdutoDigitalResource($produto);
     }
 }
