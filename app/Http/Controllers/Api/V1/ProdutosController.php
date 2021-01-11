@@ -16,6 +16,13 @@ use Illuminate\Http\JsonResponse;
 
 class ProdutosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', [
+            'except' => ['listarTodos', 'verProduto']
+        ]);
+    }
+
     public function listarTodos(ListarProdutosRequest $request): JsonResponse
     {
         try {

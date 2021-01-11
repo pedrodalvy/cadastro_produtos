@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->middleware('api')->group( function () {
@@ -9,13 +8,13 @@ Route::prefix('auth')->middleware('api')->group( function () {
     Route::post('refresh-token', 'Auth\AuthController@refresh');
 });
 
-Route::prefix('v1')->middleware(['auth:api'])->group( function () {
+Route::prefix('v1')->namespace('Api\V1')->group( function () {
     Route::prefix('produtos')->group(function () {
-        Route::get('', 'Api\V1\ProdutosController@listarTodos');
-        Route::get('/{produto}', 'Api\V1\ProdutosController@verProduto');
-        Route::post('', 'Api\V1\ProdutosController@cadastrarProduto');
-        Route::put('/{produto}', 'Api\V1\ProdutosController@editarProduto');
-        Route::post('/{produto}/desconto', 'Api\V1\ProdutosController@criarDesconto');
-        Route::delete('/{produto}', 'Api\V1\ProdutosController@removerProduto');
+        Route::get('', 'ProdutosController@listarTodos');
+        Route::post('', 'ProdutosController@cadastrarProduto');
+        Route::get('/{produto}', 'ProdutosController@verProduto');
+        Route::put('/{produto}', 'ProdutosController@editarProduto');
+        Route::post('/{produto}/desconto', 'ProdutosController@criarDesconto');
+        Route::delete('/{produto}', 'ProdutosController@removerProduto');
     });
 });
