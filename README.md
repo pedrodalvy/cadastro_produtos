@@ -56,4 +56,15 @@ Link com ducumentação dos endpoints https://documenter.getpostman.com/view/116
 - Inicializar o servidor através do comando: `php artisan serve`;
 - Enviar uma requisição via GET para http://localhost:8000/api/v1/produtos;
 
+## Fazendo login
+Ao executar a migration com os seeds, um usuário já vem cadastrado para utilização da api.
+- fazer uma requisição via POST para http://localhost:8000/api/auth/login, com o body:
+    ```json
+    {
+        "email": "user@example.com",
+        "password": "123456"
+    }
+    ```
+  
+
 Link com documentação completa dos endpoints: https://documenter.getpostman.com/view/11654668/TVzREcvW
