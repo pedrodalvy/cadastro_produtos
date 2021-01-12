@@ -34,7 +34,7 @@ Link com ducumentação dos endpoints https://documenter.getpostman.com/view/116
 ## Outros itens opcionais
 - [x] Desenvolver autenticação na API;
 - [x] Utilização de Padrões de Projetos;
-- [ ] Testes Automatizados;
+- [x] Testes Automatizados;
 - [x] Documentação de todos os endpoints.
 
 ## Tecnologias Utilizadas
