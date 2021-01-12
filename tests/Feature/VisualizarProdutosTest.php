@@ -3,21 +3,18 @@
 namespace Tests\Feature;
 
 use App\Domain\Enums\ProdutoEnum;
-use App\Models\Produto;
-use App\Models\ProdutoConfiguracao;
-use App\Models\ProdutoGrupo;
-use App\Models\ProdutoLink;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\LoginTrait;
+use Tests\Traits\ProdutosTrait;
 
 class VisualizarProdutosTest extends TestCase
 {
-    use RefreshDatabase, LoginTrait;
+    use RefreshDatabase, LoginTrait, ProdutosTrait;
 
     public function testListarProdutos(): void
     {
-        factory(Produto::class)->create();
+        $this->criarProdutoSimples();
 
         $response = $this->get('/api/v1/produtos');
 
@@ -41,12 +38,7 @@ class VisualizarProdutosTest extends TestCase
 
     public function testListarProdutosPorTipo(): void
     {
-        factory(Produto::class, 1)
-            ->states('produto_configuravel')
-            ->create()
-            ->each(function ($produto) {
-                factory(ProdutoConfiguracao::class, 3)->create(['produto_id' => $produto->id]);
-            });
+        $this->criarProdutoConfiguravel();
 
         $response = $this->get('/api/v1/produtos', [
             'tipo_id' => [ProdutoEnum::PRODUTO_CONFIGURAVEL]
@@ -61,7 +53,7 @@ class VisualizarProdutosTest extends TestCase
 
     public function testVisualizarProdutoSimples(): void
     {
-        $produto = factory(Produto::class)->states('produto_simples')->create();
+        $produto = $this->criarProdutoSimples();
 
         $response = $this->get("/api/v1/produtos/{$produto->id}");
 
@@ -80,10 +72,7 @@ class VisualizarProdutosTest extends TestCase
 
     public function testVisualizarProdutoDigital(): void
     {
-        $produto = factory(Produto::class)->states('produto_digital')->create();
-        $produto->each(function ($produto) {
-            $produto->link()->save(factory(ProdutoLink::class)->make());
-        });
+        $produto = $this->criarProdutoDigital();
 
         $response = $this->get("/api/v1/produtos/{$produto->id}");
 
@@ -103,12 +92,7 @@ class VisualizarProdutosTest extends TestCase
 
     public function testVisualizarProdutoConfiguravel(): void
     {
-        $produto = factory(Produto::class)->states('produto_configuravel')->create();
-        $produto->each(function ($produto) {
-            factory(ProdutoConfiguracao::class, 2)->create([
-                'produto_id' => $produto->id
-            ]);
-        });
+        $produto = $this->criarProdutoConfiguravel();
 
         $response = $this->get("/api/v1/produtos/{$produto->id}");
 
@@ -131,18 +115,7 @@ class VisualizarProdutosTest extends TestCase
 
     public function testVisualizarProdutoAgrupavel(): void
     {
-        $grupo = factory(Produto::class)->states('produto_agrupado')->create();
-        $grupo->each(function ($grupo) {
-                factory(Produto::class, 2)
-                    ->states('produto_simples')
-                    ->create()
-                    ->each(function ($produto) use ($grupo) {
-                        factory(ProdutoGrupo::class, 1)->create([
-                            'produto_id' => $produto->id,
-                            'grupo_id' => $grupo->id,
-                        ]);
-                    });
-            });
+        $grupo = $this->criarProdutoAgrupado();
         $produtos = $grupo->produtosAgrupados;
 
         $response = $this->get("/api/v1/produtos/{$grupo->id}");
