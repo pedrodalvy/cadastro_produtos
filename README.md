@@ -42,3 +42,18 @@ Link com ducumentação dos endpoints https://documenter.getpostman.com/view/116
 - Laravel 7;
 - MySQL;
 - Autenticação JWT.
+
+## Configurações
+- Clonar o projeto para ambiente local: `git clone https://github.com/pedrodalvy/cadastro_produtos.git cadastro_produtos`;
+- Abrir o projeto e criar o `.env` a partir do `.env.example`: `cd cadastro_produtos && cp .env.example .env`;
+- Instalar as dependências do composer: `composer install`;
+- Configurar o banco de dados no .env e executar a migration com os seeds: `php artisan migrate --seed`;
+
+## Executar os testes
+- Na raiz do projeto, executar o comando: `vendor/bin/phpunit`;
+
+## Listando os produtos
+- Inicializar o servidor através do comando: `php artisan serve`;
+- Enviar uma requisição via GET para http://localhost:8000/api/v1/produtos;
+
+Link com documentação completa dos endpoints: https://documenter.getpostman.com/view/11654668/TVzREcvW
