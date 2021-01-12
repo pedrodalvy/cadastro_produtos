@@ -10,7 +10,7 @@ class ProdutoResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
+            'id' => (int)$this->id,
             'nome' => $this->nome,
             'descricao' => $this->descricao,
             'valor' => (float)$this->valor_atual,

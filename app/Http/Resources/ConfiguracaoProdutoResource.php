@@ -10,7 +10,7 @@ class ConfiguracaoProdutoResource extends JsonResource
     {
         return [
             'atributo' => $this->nome,
-            'valor' => $this->valor,
+            'valor' => (string)$this->valor,
         ];
     }
 }

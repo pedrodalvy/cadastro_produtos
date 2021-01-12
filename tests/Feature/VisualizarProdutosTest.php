@@ -62,9 +62,9 @@ class VisualizarProdutosTest extends TestCase
             'id' => $produto->id,
             'nome' => $produto->nome,
             'descricao' => $produto->descricao,
-            'tipo_id' => $produto->tipo_id,
+            'tipo_id' => (string)$produto->tipo_id,
             'tipo' => ProdutoEnum::getDescription($produto->tipo_id),
-            'valor' => $produto->valor_atual,
+            'valor' => (string)$produto->valor_atual,
             'criado_em' => $produto->created_at->format('Y-m-d H:i:s'),
             'atualizado_em' => $produto->updated_at->format('Y-m-d H:i:s')
         ]);
@@ -81,9 +81,9 @@ class VisualizarProdutosTest extends TestCase
             'id' => $produto->id,
             'nome' => $produto->nome,
             'descricao' => $produto->descricao,
-            'tipo_id' => $produto->tipo_id,
+            'tipo_id' => (string)$produto->tipo_id,
             'tipo' => ProdutoEnum::getDescription($produto->tipo_id),
-            'valor' => $produto->valor_atual,
+            'valor' => (string)$produto->valor_atual,
             'link' => $produto->link->link,
             'criado_em' => $produto->created_at->format('Y-m-d H:i:s'),
             'atualizado_em' => $produto->updated_at->format('Y-m-d H:i:s')
@@ -101,9 +101,9 @@ class VisualizarProdutosTest extends TestCase
             'id' => $produto->id,
             'nome' => $produto->nome,
             'descricao' => $produto->descricao,
-            'tipo_id' => $produto->tipo_id,
+            'tipo_id' => (string)$produto->tipo_id,
             'tipo' => ProdutoEnum::getDescription($produto->tipo_id),
-            'valor' => $produto->valor_atual,
+            'valor' => (string)$produto->valor_atual,
             'criado_em' => $produto->created_at->format('Y-m-d H:i:s'),
             'atualizado_em' => $produto->updated_at->format('Y-m-d H:i:s'),
             'caracteristicas' => [
@@ -125,9 +125,9 @@ class VisualizarProdutosTest extends TestCase
             'id' => $grupo->id,
             'nome' => $grupo->nome,
             'descricao' => $grupo->descricao,
-            'tipo_id' => $grupo->tipo_id,
+            'tipo_id' => (string)$grupo->tipo_id,
             'tipo' => ProdutoEnum::getDescription($grupo->tipo_id),
-            'valor' => $grupo->valor_atual,
+            'valor' => (string)$grupo->valor_atual,
             'criado_em' => $grupo->created_at->format('Y-m-d H:i:s'),
             'atualizado_em' => $grupo->updated_at->format('Y-m-d H:i:s'),
             'produtos_agrupados' => [
@@ -135,9 +135,9 @@ class VisualizarProdutosTest extends TestCase
                     'id' => $produtos[0]->id,
                     'nome' => $produtos[0]->nome,
                     'descricao' => $produtos[0]->descricao,
-                    'tipo_id' => $produtos[0]->tipo_id,
+                    'tipo_id' => (string)$produtos[0]->tipo_id,
                     'tipo' => ProdutoEnum::getDescription($produtos[0]->tipo_id),
-                    'valor' => $produtos[0]->valor_atual,
+                    'valor' => (string)$produtos[0]->valor_atual,
                     'criado_em' => $produtos[0]->created_at->format('Y-m-d H:i:s'),
                     'atualizado_em' => $produtos[0]->updated_at->format('Y-m-d H:i:s')
                 ],
@@ -145,9 +145,9 @@ class VisualizarProdutosTest extends TestCase
                     'id' => $produtos[1]->id,
                     'nome' => $produtos[1]->nome,
                     'descricao' => $produtos[1]->descricao,
-                    'tipo_id' => $produtos[1]->tipo_id,
+                    'tipo_id' => (string)$produtos[1]->tipo_id,
                     'tipo' => ProdutoEnum::getDescription($produtos[1]->tipo_id),
-                    'valor' => $produtos[1]->valor_atual,
+                    'valor' => (string)$produtos[1]->valor_atual,
                     'criado_em' => $produtos[1]->created_at->format('Y-m-d H:i:s'),
                     'atualizado_em' => $produtos[1]->updated_at->format('Y-m-d H:i:s')
                 ]

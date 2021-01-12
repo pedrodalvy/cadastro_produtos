@@ -10,10 +10,10 @@ class ProdutoDigitalResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
+            'id' => (int)$this->id,
             'nome' => $this->nome,
             'descricao' => $this->descricao,
-            'tipo_id' => $this->tipo_id,
+            'tipo_id' => (int)$this->tipo_id,
             'tipo' => ProdutoEnum::getDescription($this->tipo_id),
             'valor' => (float)$this->valor_atual,
             'link' => $this->link->link,

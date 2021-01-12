@@ -18,7 +18,7 @@ class CadastrarProdutosTest extends TestCase
         $produto = [
             'nome' => $this->faker->name,
             'descricao' => $this->faker->sentence,
-            'valor' => $this->faker->randomNumber(2),
+            'valor' => 100.99,
             'tipo_id' => ProdutoEnum::PRODUTO_SIMPLES
         ];
 
@@ -33,7 +33,7 @@ class CadastrarProdutosTest extends TestCase
             'descricao' => $produto['descricao'],
             'tipo_id' => $produto['tipo_id'],
             'tipo' => ProdutoEnum::getDescription($produto['tipo_id']),
-            'valor' => $produto['valor'],
+            'valor' => (float)$produto['valor'],
         ]);
     }
 
@@ -42,7 +42,7 @@ class CadastrarProdutosTest extends TestCase
         $produto = [
             'nome' => $this->faker->name,
             'descricao' => $this->faker->sentence,
-            'valor' => $this->faker->randomNumber(2),
+            'valor' => 100.99,
             'tipo_id' => ProdutoEnum::PRODUTO_DIGITAL,
             'link' => $this->faker->url
         ];
@@ -58,7 +58,7 @@ class CadastrarProdutosTest extends TestCase
             'descricao' => $produto['descricao'],
             'tipo_id' => $produto['tipo_id'],
             'tipo' => ProdutoEnum::getDescription($produto['tipo_id']),
-            'valor' => $produto['valor'],
+            'valor' => (float)$produto['valor'],
             'link' => $produto['link']
         ]);
     }
@@ -68,7 +68,7 @@ class CadastrarProdutosTest extends TestCase
         $produto = [
             'nome' => $this->faker->name,
             'descricao' => $this->faker->sentence,
-            'valor' => $this->faker->randomNumber(2),
+            'valor' => 100.99,
             'tipo_id' => ProdutoEnum::PRODUTO_CONFIGURAVEL,
             'configuracao' => [
                 ['nome' => $this->faker->name, 'valor' => $this->faker->randomNumber(1)],
@@ -89,7 +89,7 @@ class CadastrarProdutosTest extends TestCase
             'descricao' => $produto['descricao'],
             'tipo_id' => $produto['tipo_id'],
             'tipo' => ProdutoEnum::getDescription($produto['tipo_id']),
-            'valor' => $produto['valor'],
+            'valor' => (float)$produto['valor'],
             'caracteristicas' => [
                 [
                     'atributo' => $produto['configuracao'][0]['nome'],
@@ -111,7 +111,7 @@ class CadastrarProdutosTest extends TestCase
         $grupo = [
             'nome' => $this->faker->name,
             'descricao' => $this->faker->sentence,
-            'valor' => $this->faker->randomNumber(2),
+            'valor' => 100.99,
             'tipo_id' => ProdutoEnum::PRODUTO_AGRUPADO,
             'produtos' => [
                 ['produto_id' => $produtoSimplesA->id],
@@ -130,13 +130,13 @@ class CadastrarProdutosTest extends TestCase
             'descricao' => $grupo['descricao'],
             'tipo_id' => $grupo['tipo_id'],
             'tipo' => ProdutoEnum::getDescription($grupo['tipo_id']),
-            'valor' => $grupo['valor'],
+            'valor' => (float)$grupo['valor'],
             'produtos_agrupados' => [
                 [
                     'id' => $produtoSimplesA->id,
                     'nome' => $produtoSimplesA->nome,
                     'descricao' => $produtoSimplesA->descricao,
-                    'tipo_id' => (string)$produtoSimplesA->tipo_id,
+                    'tipo_id' => $produtoSimplesA->tipo_id,
                     'tipo' => ProdutoEnum::getDescription($produtoSimplesA->tipo_id),
                     'valor' => (float)$produtoSimplesA->valor_atual,
                     'criado_em' => $produtoSimplesA->created_at->format('Y-m-d H:i:s'),
@@ -146,7 +146,7 @@ class CadastrarProdutosTest extends TestCase
                     'id' => $produtoSimplesB->id,
                     'nome' => $produtoSimplesB->nome,
                     'descricao' => $produtoSimplesB->descricao,
-                    'tipo_id' => (string)$produtoSimplesB->tipo_id,
+                    'tipo_id' => $produtoSimplesB->tipo_id,
                     'tipo' => ProdutoEnum::getDescription($produtoSimplesB->tipo_id),
                     'valor' => (float)$produtoSimplesB->valor_atual,
                     'criado_em' => $produtoSimplesB->created_at->format('Y-m-d H:i:s'),
